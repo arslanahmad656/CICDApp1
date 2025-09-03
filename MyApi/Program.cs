@@ -39,4 +39,6 @@ app.MapGet("/add", (int a, int b, ICalculator calc) => Results.Ok(calc.Add(a, b)
 
 app.MapGet("/sub", (int a, int b, ICalculator calc) => Results.Ok(calc.Sub(a, b)));
 
+app.MapGet("/mul", (int a, int b, ICalculator calc) => Results.Ok(calc.Mul(a, b)));
+
 app.Run();

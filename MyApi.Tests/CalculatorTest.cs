@@ -17,4 +17,11 @@ public class CalculatorTest
         var calc = new Calculator();
         Assert.Equal(4, calc.Sub(10, 6));
     }
+
+    [Fact]
+    public void Mul_ReturnsCorrectProduct()
+    {
+        var calc = new Calculator();
+        Assert.Equal(15, calc.Mul(3, 5));
+    }
 }
