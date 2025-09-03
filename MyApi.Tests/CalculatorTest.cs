@@ -10,4 +10,11 @@ public class CalculatorTest
         var calc = new Calculator();
         Assert.Equal(10, calc.Add(2, 8));
     }
+
+    [Fact]
+    public void Sub_ReturnsCorrectDifference()
+    {
+        var calc = new Calculator();
+        Assert.Equal(4, calc.Sub(10, 6));
+    }
 }

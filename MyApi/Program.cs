@@ -35,6 +35,8 @@ app.Use(async (context, next) =>
 	}
 });
 
-app.MapGet("/add", (int a, int b, ICalculator calc) => Results.Ok(a + b));
+app.MapGet("/add", (int a, int b, ICalculator calc) => Results.Ok(calc.Add(a, b)));
+
+app.MapGet("/sub", (int a, int b, ICalculator calc) => Results.Ok(calc.Sub(a, b)));
 
 app.Run();
