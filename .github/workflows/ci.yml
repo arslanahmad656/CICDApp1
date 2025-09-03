@@ -2,9 +2,8 @@ name: .NET CI
 
 on:
   push:
-    branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
+    tags:
+        - 'v*.*.*'
 
 jobs:
     build-test:
@@ -22,6 +21,9 @@ jobs:
         - run: dotnet build --no-restore --configuration Release
         - run: dotnet test --no-build --configuration Release --verbosity normal
 
+        - name: Extract version from tag
+          run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_ENV
+
         
         - name: Built Docker Image
           run: docker build -t cicddemo1 .
@@ -34,5 +36,7 @@ jobs:
 
         - name: Push to Docker Hub
           run: |
+            docker tag cicddemo1 ${{ secrets.DOCKERHUB_USERNAME }}/cicddemo1:${VERSION}
+            docker push ${{ secrets.DOCKERHUB_USERNAME }}/cicddemo1:${VERSION}
             docker tag cicddemo1 ${{ secrets.DOCKERHUB_USERNAME }}/cicddemo1:latest
             docker push ${{ secrets.DOCKERHUB_USERNAME }}/cicddemo1:latest
